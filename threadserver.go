@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	pb "github.com/clevyr/guessmatch-threadserver/protobuf"
+	pb "github.com/USA-RedDragon/golang-threadserver/protobuf"
 
 	"github.com/go-redis/redis"
 	"github.com/golang/protobuf/proto"

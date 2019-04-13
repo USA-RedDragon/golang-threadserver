@@ -4,7 +4,7 @@ import (
 	"hash/crc32"
 	"net"
 
-	pb "github.com/clevyr/guessmatch-threadserver/protobuf"
+	pb "github.com/USA-RedDragon/golang-threadserver/protobuf"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
