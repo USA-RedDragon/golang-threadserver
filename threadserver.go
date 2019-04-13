@@ -1,9 +1,11 @@
 package main
 
 import (
+	"crypto/rsa"
 	"encoding/hex"
 	"fmt"
 	"net"
+	"os"
 	"time"
 
 	pb "github.com/USA-RedDragon/golang-threadserver/protobuf"
@@ -36,12 +38,13 @@ func start(host string, port int, redisHost string) {
 		redisClient.Publish("queue:"+element, "")
 	}
 
-	/*var serverKey *rsa.PrivateKey
+	var serverKey *rsa.PrivateKey
 	if _, err := os.Stat("private_key.pem"); err == nil {
 		serverKey = loadServerKey()
 	} else if os.IsNotExist(err) {
 		serverKey = generateServerKey()
-	}*/
+	}
+	log("Created server key", serverKey)
 
 	buffer := make([]byte, 4096)
 	sockerAddr := net.UDPAddr{

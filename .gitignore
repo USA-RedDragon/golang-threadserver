@@ -1,1 +1,4 @@
-guessmatch-threadserver
+golang-threadserver
+protobuf/*.go
+*.pem
+client/client

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package guessmatch;
+
+import "google/protobuf/timestamp.proto";
+
+message Packet {
+
+    enum PacketType {
+        NONE = 0;  // default, no type
+        AUTH = 1; // For handshake
+        GAME = 2; // For things related to the current game like questions, answers, turns
+        DATA = 3; // For data like consumables used, points scored, etc
+        HEARTBEAT = 4; // UDP Heartbeat
+        INIT = 5; // Init game
+        ERROR = 6; // Error occurred
+        RETRY = 7; // Retry
+        CHECK_TIMEOUT = 8; // Retry
+    }
+
+    PacketType type = 1;
+    uint32 sequence = 2; // The packet number, first sent is 1, second 2, etc
+    fixed32 messageLength = 3; // Number of bytes in the message, should be set 2nd to last, this is also always 4 bytes
+    bytes message = 4; // The protobuf message, AES encrypted(RSA-encrypted AES key if type == AUTH)
+    google.protobuf.Timestamp timestamp = 5; // Seconds since epoch
+    fixed32 crc = 6; // The CRC32 checksum of the packet
+    string playerID = 7; // A uuid for the user
+    fixed32 responseTo = 8;
+}
+
+message PlayerMetaData{
+    bytes aes =1;
+    string address = 2;
+    uint32 port = 3;
+}
